@@ -13,19 +13,3 @@ export const loadNews = async () => {
     Alert.alert("Press reload to refresh the screen");
   }
 };
-
-export const updateNews = async (data) => {
-  let input = data;
-  let headers = {
-    Accept: "application/json",
-    "Content-Type": "application/json",
-  };
-  try {
-    const result = await apiService(`news/${data.id}`, "put", input, headers);
-    const data = await result;
-    console.log("updateNews", data);
-    return data.data;
-  } catch (error) {
-    Alert.alert("Press reload to refresh the screen");
-  }
-};

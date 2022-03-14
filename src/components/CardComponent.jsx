@@ -10,10 +10,9 @@ const CardComponent = ({ item, navigation, id }) => {
         <Image
           style={[styles.img]}
           source={{
-            uri: "https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg",
+            uri: `"https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg"`,
           }}
         />
-
         <View style={[styles.info]}>
           <Text h4 style={[styles.title]}>
             {item.title}

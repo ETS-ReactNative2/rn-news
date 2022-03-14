@@ -1,4 +1,4 @@
-import { deleteArticle } from "../../utils/lib/news";
+import { deleteArticle, getArticle } from "../../utils/lib/news";
 import { loadNews, updateNews } from "./api";
 
 const model = {
@@ -78,7 +78,7 @@ const model = {
 
   effects: (dispatch) => ({
     async load() {
-      const news = await loadNews();
+      const news = await getArticle();
       dispatch.news.loaded(news);
     },
     async update(data) {

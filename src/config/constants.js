@@ -1,3 +1,6 @@
+export const defaultImage =
+  "https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg";
+
 export const sampleNews = {
   id: "19",
   author: "New",

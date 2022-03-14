@@ -39,7 +39,7 @@ const NewsList = ({ navigation }) => {
       setBody("");
       setAuthor("");
       setIsVisible(false);
-      toast.show("Task finished successfully", {
+      toast.show("News Added successfully", {
         type: "success",
         placement: "top",
         duration: 4000,
