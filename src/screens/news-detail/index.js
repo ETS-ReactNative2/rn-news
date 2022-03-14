@@ -110,62 +110,10 @@ const NewsDetail = ({ route, navigation }) => {
             />
           </View>
         </SingleNews>
-        <View style={styles.centeredView}>
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={modalVisible}
-            onRequestClose={() => {
-              Alert.alert("Modal has been closed.");
-              setModalVisible(!modalVisible);
-            }}
-            style={{ width: 200 }}
-          >
-            <View>
-              <Card>
-                <Card.Title>Update News</Card.Title>
-                <Input
-                  placeholder="Author"
-                  leftIcon={{ type: "font-awesome", name: "user" }}
-                  onChangeText={(value) => setAuthor(value)}
-                  defaultValue={filteredNews.author}
-                />
-                <Input
-                  placeholder="content"
-                  defaultValue={filteredNews.body}
-                  leftIcon={{ type: "font-awesome", name: "comment" }}
-                  onChangeText={(value) => setBody(value)}
-                />
-                <View style={styles.buttonContainer}>
-                  <Button
-                    title="Hide"
-                    onPress={() => {
-                      onEditNews();
-                      setModalVisible(!modalVisible);
-                    }}
-                    buttonStyle={styles.button}
-                  />
-                  <Button
-                    title="Update News"
-                    onPress={() => {
-                      onEditNews();
-                      setModalVisible(!modalVisible);
-                    }}
-                    buttonStyle={styles.button}
-                  />
-                </View>
-
-                <Pressable
-                  style={[styles.button, styles.buttonClose]}
-                  onPress={() => setModalVisible(!modalVisible)}
-                >
-                  <Text style={styles.textStyle}>Hide</Text>
-                </Pressable>
-              </Card>
-            </View>
-          </Modal>
-        </View>
-        {/* <AppModal modalVisible={modalVisible} setModalVisible={setModal} /> */}
+        <AppModal
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+        />
         <CommentBox
           onDeleteComment={onDeleteComment}
           filteredNews={filteredNews}
@@ -217,38 +165,5 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22,
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-  buttonClose: {
-    backgroundColor: "#2196F3",
-  },
-  textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center",
   },
 });

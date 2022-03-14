@@ -1,36 +1,36 @@
 {
   /* <Card style={{ height: 300 }}>
-              <Text>Update News</Text>
-              <Input
-                placeholder="Author"
-                leftIcon={{ type: "font-awesome", name: "user" }}
-                onChangeText={(value) => setAuthor(value)}
-                defaultValue={filteredNews.author}
-              />
-              <Input
-                placeholder="content"
-                defaultValue={filteredNews.body}
-                leftIcon={{ type: "font-awesome", name: "comment" }}
-                onChangeText={(value) => setBody(value)}
-              />
-              <Button
-                title="Update News"
-                onPress={onEditNews}
-                buttonStyle={styles.button}
-              />
-            </Card> */
+      <Card.Title>Update News</Card.Title>
+      <Input
+        placeholder="Author"
+        leftIcon={{ type: "font-awesome", name: "user" }}
+        onChangeText={(value) => setAuthor(value)}
+        defaultValue={filteredNews.author}
+      />
+      <Input
+        placeholder="content"
+        defaultValue={filteredNews.body}
+        leftIcon={{ type: "font-awesome", name: "comment" }}
+        onChangeText={(value) => setBody(value)}
+      />
+      <Button
+        title="Update News"
+        onPress={onEditNews}
+        buttonStyle={styles.button}
+      />
+  </Card> */
 }
 {
   /* {filteredNews.comments.map((item) => {
-            <ListItem
-              title={item.name}
-              subTitle={item.comment}
-              image={item.avatar}
-              renderRightActions={() => (
-                <ListItemDeleteAction onPress={() => onDeleteComment(item)} />
-              )}
-            />;
-          })} */
+      <ListItem
+        title={item.name}
+        subTitle={item.comment}
+        image={item.avatar}
+        renderRightActions={() => (
+          <ListItemDeleteAction onPress={() => onDeleteComment(item)} />
+        )}
+      />;
+    })} */
 }
 <Card>
   <Text>Create Comment</Text>
