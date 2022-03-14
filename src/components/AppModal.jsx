@@ -1,31 +1,53 @@
 import React from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
+import { Alert, Modal, StyleSheet, View } from "react-native";
+import { Card, Button } from "react-native-elements";
+import { windowWidth } from "../config/theme";
 
-const AppModal = ({ modalVisible, setModalVisible }) => {
+const AppModal = ({
+  modalVisible,
+  setModalVisible,
+  title,
+  onEditFinished,
+  children,
+}) => {
   return (
-    <View style={styles.centeredView}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <Text style={styles.textStyle}>Hide Modal</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
-    </View>
+    <Modal
+      animationType="slide"
+      transparent={true}
+      visible={modalVisible}
+      onRequestClose={() => {
+        Alert.alert("Modal has been closed.");
+        setModalVisible(!modalVisible);
+      }}
+    >
+      <View style={styles.centeredView}>
+        {
+          <Card>
+            <View>
+              <Card.Title>{title}</Card.Title>
+              {children}
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Button
+                  title="Update"
+                  onPress={onEditFinished}
+                  buttonStyle={[styles.button]}
+                />
+                <Button
+                  title="Close"
+                  onPress={() => setModalVisible(!modalVisible)}
+                  buttonStyle={[styles.button, styles.buttonClose]}
+                />
+              </View>
+            </View>
+          </Card>
+        }
+      </View>
+    </Modal>
   );
 };
 
@@ -35,6 +57,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22,
+    width: windowWidth,
   },
   modalView: {
     margin: 20,
@@ -51,13 +74,8 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
   buttonClose: {
-    backgroundColor: "#2196F3",
+    backgroundColor: "#c40a0a",
   },
   textStyle: {
     color: "white",

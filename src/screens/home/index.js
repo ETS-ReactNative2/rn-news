@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import uuid from "react-native-uuid";
 import { useDispatch, useSelector } from "react-redux";
+import { useToast } from "react-native-toast-notifications";
 import {
   View,
   StyleSheet,
@@ -8,13 +9,16 @@ import {
   FlatList,
   Alert,
   ActivityIndicator,
+  StatusBar,
 } from "react-native";
 import CardComponent from "../../components/CardComponent";
 import { Button, BottomSheet, Input, FAB, Card } from "react-native-elements";
+import { sampleNews } from "../../config/constants";
 
 const NewsList = ({ navigation }) => {
   const news = useSelector((state) => state.news);
   const dispatch = useDispatch().news;
+  const toast = useToast();
   const [isFetching, setIsFetching] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
   const [author, setAuthor] = useState("");
@@ -24,6 +28,7 @@ const NewsList = ({ navigation }) => {
   const onSubmit = async () => {
     if (title && body && author) {
       await dispatch.createNews({
+        ...sampleNews,
         id: uuid.v4(),
         title: title,
         body: body,
@@ -34,6 +39,13 @@ const NewsList = ({ navigation }) => {
       setBody("");
       setAuthor("");
       setIsVisible(false);
+      toast.show("Task finished successfully", {
+        type: "success",
+        placement: "top",
+        duration: 4000,
+        offset: StatusBar.currentHeight,
+        animationType: "slide-in",
+      });
     } else {
       Alert.alert("Please enter valid data");
     }
@@ -65,7 +77,7 @@ const NewsList = ({ navigation }) => {
             visible={!isVisible}
             onPress={() => setIsVisible(!isVisible)}
             placement="left"
-            title="Create News"
+            title="Create"
             icon={{ name: "edit", color: "white" }}
             color="blue"
             style={styles.button}

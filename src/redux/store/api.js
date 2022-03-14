@@ -1,4 +1,4 @@
-import React, { Alert } from "react-native";
+import { Alert } from "react-native";
 import { apiService } from "../../utils";
 
 export const loadNews = async () => {

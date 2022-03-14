@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, Modal, Pressable } from "react-native";
+import { StyleSheet, Alert, View, ScrollView } from "react-native";
+import { Button, Input, Card, FAB } from "react-native-elements";
+import { useToast } from "react-native-toast-notifications";
 import { useDispatch, useSelector } from "react-redux";
 import uuid from "react-native-uuid";
-import { StyleSheet, Image, FlatList, Text, Alert, View } from "react-native";
-import { Button, BottomSheet, Input, Card, FAB } from "react-native-elements";
+
 import SingleNews from "../../components/SingleNews";
-import ListItem from "../../components/ListItem";
-import ListItemDeleteAction from "../../components/ListItemDeleteAction";
 import Screen from "../../components/Screen";
 import AppModal from "../../components/AppModal";
 import CommentBox from "../../components/CommentBox";
@@ -15,6 +14,7 @@ const NewsDetail = ({ route, navigation }) => {
   const { item } = route.params;
   const news = useSelector((state) => state.news);
   const dispatch = useDispatch().news;
+  const toast = useToast();
   const filteredNews = news.find((a) => a.id === item.id);
 
   console.log(filteredNews);
@@ -26,15 +26,25 @@ const NewsDetail = ({ route, navigation }) => {
   const [commentBody, setCommentBody] = useState("");
   const [isVisible, setIsVisible] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalType, setModalType] = useState("");
+  const [commentId, setCommentId] = useState();
 
-  const onEditNews = async () => {
+  const onEditNews = () => {
+    setModalType("news");
     if (body && author) {
       dispatch.editNews({
         ...item,
         body: body,
         author: author,
       });
-
+      setIsVisible(false);
+      toast.show("Task finished successfully", {
+        type: "success",
+        placement: "top",
+        duration: 4000,
+        offset: 30,
+        animationType: "slide-in",
+      });
       setTitle("");
       setBody("");
       setAuthor("");
@@ -69,11 +79,20 @@ const NewsDetail = ({ route, navigation }) => {
     dispatch.deleteComment({ ...comment });
   };
 
+  const onEdit = (type, commentId) => {
+    setModalType(type);
+    if (type === "comment") {
+      setCommentId(commentId);
+      setModalVisible(true);
+    }
+  };
+
   const onEditComment = () => {
+    setModalType("");
     if (commentBody && commentAuthor) {
       dispatch.editComment({
         newsId: item.id,
-        id: uuid.v4(),
+        id: commentId,
         name: commentAuthor,
         avatar: "http://lorempixel.com/640/480/fashion",
         comment: commentBody,
@@ -110,23 +129,65 @@ const NewsDetail = ({ route, navigation }) => {
             />
           </View>
         </SingleNews>
-        <AppModal
-          modalVisible={modalVisible}
-          setModalVisible={setModalVisible}
-        />
+        {modalType === "comment" ? (
+          <AppModal
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+            onEditFinished={onEditComment}
+            title="Update Comment"
+          >
+            <Input
+              placeholder="Author"
+              leftIcon={{ type: "font-awesome", name: "user" }}
+              onChangeText={(value) => setCommentAuthor(value)}
+            />
+            <Input
+              placeholder="content"
+              leftIcon={{ type: "font-awesome", name: "comment" }}
+              onChangeText={(value) => setCommentBody(value)}
+            />
+          </AppModal>
+        ) : (
+          <AppModal
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+            onEditFinished={onEditNews}
+            title="Update News"
+          >
+            <Input
+              placeholder="Author"
+              leftIcon={{ type: "font-awesome", name: "user" }}
+              onChangeText={(value) => setAuthor(value)}
+              defaultValue={filteredNews.author}
+            />
+            <Input
+              placeholder="content"
+              defaultValue={filteredNews.body}
+              leftIcon={{ type: "font-awesome", name: "comment" }}
+              onChangeText={(value) => setBody(value)}
+            />
+          </AppModal>
+        )}
         <CommentBox
           onDeleteComment={onDeleteComment}
           filteredNews={filteredNews}
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+          onEditFinished={onEditComment}
+          onPressEdit={onEdit}
+          title="Update News"
         />
         <Card>
           <Card.Title>Create Comment</Card.Title>
           <Input
             placeholder="Name"
+            value={commentAuthor}
             leftIcon={{ type: "font-awesome", name: "user" }}
             onChangeText={(value) => setCommentAuthor(value)}
           />
           <Input
             placeholder="comment"
+            value={commentBody}
             leftIcon={{ type: "font-awesome", name: "comment" }}
             onChangeText={(value) => setCommentBody(value)}
           />

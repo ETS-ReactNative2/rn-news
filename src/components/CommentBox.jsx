@@ -1,10 +1,11 @@
 import { StyleSheet, FlatList } from "react-native";
-import { Card } from "react-native-elements";
+import { Button, Card, Input, FAB } from "react-native-elements";
 import React from "react";
 import ListItem from "./ListItem";
 import ListItemDeleteAction from "./ListItemDeleteAction";
+import AppModal from "./AppModal";
 
-const CommentBox = ({ filteredNews, onDeleteComment }) => {
+const CommentBox = ({ filteredNews, onDeleteComment, onPressEdit }) => {
   return (
     <Card>
       <Card.Title>Comments</Card.Title>
@@ -12,14 +13,20 @@ const CommentBox = ({ filteredNews, onDeleteComment }) => {
         data={filteredNews.comments}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <ListItem
-            title={item.name}
-            subTitle={item.comment}
-            renderRightAction={() => (
-              <ListItemDeleteAction onPress={() => onDeleteComment(item)} />
-            )}
-            onPress={() => onDeleteComment(item)}
-          />
+          <>
+            <ListItem
+              title={item.name}
+              subTitle={item.comment}
+              renderRightAction={() => (
+                <ListItemDeleteAction onPress={() => onDeleteComment(item)} />
+              )}
+              onPress={() => onDeleteComment(item)}
+            />
+            <Button
+              onPress={() => onPressEdit("comment", item.id)}
+              title="Edit"
+            />
+          </>
         )}
       />
     </Card>
