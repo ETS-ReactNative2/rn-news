@@ -1,4 +1,5 @@
-import { loadNews } from "./api";
+import { deleteArticle } from "../../utils/lib/news";
+import { loadNews, updateNews } from "./api";
 
 const model = {
   state: [],
@@ -11,7 +12,7 @@ const model = {
           return {
             ...news,
             author: payload.author,
-            summary: payload.summary,
+            body: payload.body,
           };
         }
 
@@ -46,9 +47,11 @@ const model = {
             comments: [
               ...news.comments,
               {
+                newsId: news.id,
                 id: payload.id,
-                author: payload.author,
-                content: payload.content,
+                name: payload.name,
+                avatar: payload.avatar,
+                comment: payload.comment,
               },
             ],
           };
@@ -61,8 +64,8 @@ const model = {
         if (news.id === payload.newsId) {
           let index = news.comments.findIndex((item) => item.id === payload.id);
           let commentsCopy = news.comments.slice();
-          commentsCopy[index].author = payload.author;
-          commentsCopy[index].content = payload.content;
+          commentsCopy[index].name = payload.name;
+          commentsCopy[index].comment = payload.comment;
           return {
             ...news,
             comments: commentsCopy,
@@ -77,6 +80,16 @@ const model = {
     async load() {
       const news = await loadNews();
       dispatch.news.loaded(news);
+    },
+    async update(data) {
+      const news = await updateNews(data);
+      await dispatch.news.editNews(news);
+    },
+    async delete(data) {
+      console.log(data);
+      const news = await deleteArticle(data);
+      dispatch.news.deleteNews(news);
+      // dispatch.news.loaded(news);
     },
   }),
 };

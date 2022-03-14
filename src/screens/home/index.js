@@ -1,45 +1,142 @@
 import React, { useEffect, useState } from "react";
+import uuid from "react-native-uuid";
 import { useDispatch, useSelector } from "react-redux";
-import { View, StyleSheet, Image, SafeAreaView, FlatList } from "react-native";
+import {
+  View,
+  StyleSheet,
+  SafeAreaView,
+  FlatList,
+  Alert,
+  ActivityIndicator,
+} from "react-native";
 import CardComponent from "../../components/CardComponent";
-import BottomSheetComponent from "../../components/ButtomSheet";
-import { Button } from "react-native-elements";
+import { Button, BottomSheet, Input, FAB, Card } from "react-native-elements";
 
-const NewsList = () => {
+const NewsList = ({ navigation }) => {
   const news = useSelector((state) => state.news);
   const dispatch = useDispatch().news;
+  const [isFetching, setIsFetching] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
   const [author, setAuthor] = useState("");
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
+  const onSubmit = async () => {
+    if (title && body && author) {
+      await dispatch.createNews({
+        id: uuid.v4(),
+        title: title,
+        body: body,
+        author: author,
+      });
+
+      setTitle("");
+      setBody("");
+      setAuthor("");
+      setIsVisible(false);
+    } else {
+      Alert.alert("Please enter valid data");
+    }
+  };
+
   useEffect(() => {
     dispatch.load();
+    setIsFetching(false);
   }, []);
 
   console.log(news);
 
   const renderItem = ({ item }) => (
-    <CardComponent title={item.title} author={item.author} />
+    <CardComponent item={item} navigation={navigation} id={item.id} />
   );
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Button
-        title="Open Bottom Sheet"
-        onPress={() => setIsVisible(true)}
-        buttonStyle={styles.button}
-      />
-      <FlatList
-        data={news}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-      />
-      <BottomSheetComponent isVisible={isVisible} />
+    <SafeAreaView>
+      {isFetching ? (
+        <ActivityIndicator />
+      ) : (
+        <>
+          <FlatList
+            data={news}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id}
+          />
+          <FAB
+            visible={!isVisible}
+            onPress={() => setIsVisible(!isVisible)}
+            placement="left"
+            title="Create News"
+            icon={{ name: "edit", color: "white" }}
+            color="blue"
+            style={styles.button}
+          />
+        </>
+      )}
+
+      <BottomSheet
+        modalProps={{}}
+        isVisible={isVisible}
+        containerStyle={styles.buttomSheet}
+      >
+        <Card style={{ height: 300 }}>
+          <Input
+            placeholder="Author"
+            leftIcon={{ type: "font-awesome", name: "user" }}
+            onChangeText={(value) => setAuthor(value)}
+          />
+          <Input
+            placeholder="Title"
+            leftIcon={{ type: "font-awesome", name: "user" }}
+            onChangeText={(value) => setTitle(value)}
+          />
+          <Input
+            placeholder="content"
+            leftIcon={{ type: "font-awesome", name: "comment" }}
+            onChangeText={(value) => setBody(value)}
+          />
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <Button
+              title="Cancle"
+              onPress={() => setIsVisible(false)}
+              style={styles.buttonAction}
+            />
+            <Button
+              title="Create News"
+              onPress={onSubmit}
+              style={styles.buttonAction}
+            />
+          </View>
+        </Card>
+      </BottomSheet>
     </SafeAreaView>
   );
 };
 
 export default NewsList;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  button: {
+    margin: 10,
+    // flex: 1,
+  },
+  buttonContainer: {
+    flexDirection: "column",
+    flex: 1,
+    height: 100,
+  },
+  buttonAction: {
+    flexBasis: 1,
+  },
+  bottomNavigationView: {
+    backgroundColor: "#fff",
+    width: "100%",
+    height: 250,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
