@@ -11,18 +11,12 @@ const windowHeight = Dimensions.get("window").height;
 const SingleNews = ({ item, children }) => {
   return (
     <View style={styles.container}>
-      {item.images ? (
-        <Image
-          source={{ uri: item.images[0].uri }}
-          style={{ height: "30%", resizeMode: "cover", width: windowWidth }}
-        />
-      ) : (
-        <Image
-          source={{ uri: defaultImage }}
-          style={{ height: "30%", resizeMode: "cover", width: windowWidth }}
-        />
-      )}
-
+      <Image
+        source={
+          item.images ? { uri: item.images[0].uri } : { uri: defaultImage }
+        }
+        style={{ height: "30%", resizeMode: "cover", width: windowWidth }}
+      />
       <View
         style={{
           ...styles.description,

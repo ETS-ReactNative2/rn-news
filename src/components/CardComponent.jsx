@@ -20,9 +20,9 @@ const CardComponent = ({ item, navigation, id }) => {
       <View style={[styles.wrapper]}>
         <Image
           style={[styles.img]}
-          source={{
-            uri: defaultImage,
-          }}
+          source={
+            item.images ? { uri: item.images[0].uri } : { uri: defaultImage }
+          }
         />
         <View style={[styles.info]}>
           <Text h4 style={[styles.title]}>
