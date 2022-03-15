@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     borderRadius: 35,
   },
   subTitle: {
-    color: color.light_grey,
+    color: color.grey,
   },
   title: {
     fontWeight: "500",
