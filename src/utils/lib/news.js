@@ -50,7 +50,7 @@ export const updateComment = async (comment) => {
   let commentToUpdate = comment;
   try {
     let result = axios.delete(
-      `${BASE_URL}news/${commentToUpdate.newsId}/comment/${commentToUpdate.id}`
+      `${BASE_URL}news/${commentToUpdate.newsId}/comments/${commentToUpdate.id}`
     );
     let data = await result;
     return data.data;
@@ -63,7 +63,7 @@ export const deleteComment = async (comment) => {
   let commentToDelete = comment;
   try {
     let result = axios.delete(
-      `${BASE_URL}news/${commentToDelete.newsId}/commen/${commentToDelete.id}`
+      `${BASE_URL}news/${commentToDelete.newsId}/comments/${commentToDelete.id}`
     );
     let data = await result;
     return data.data;
