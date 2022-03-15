@@ -1,5 +1,4 @@
 import { deleteArticle, getArticle } from "../../utils/lib/news";
-import { loadNews, updateNews } from "./api";
 
 const model = {
   state: [],
@@ -82,14 +81,13 @@ const model = {
       dispatch.news.loaded(news);
     },
     async update(data) {
-      const news = await updateNews(data);
+      const news = await updateArticle(data);
       await dispatch.news.editNews(news);
     },
     async delete(data) {
       console.log(data);
       const news = await deleteArticle(data);
       dispatch.news.deleteNews(news);
-      // dispatch.news.loaded(news);
     },
   }),
 };

@@ -1,5 +1,6 @@
 import { BASE_URL } from "../apiClient";
 import axios from "axios";
+import { Alert } from "react-native";
 
 const handleNews = () => {
   return new Promise((resolve, reject) => {
@@ -33,17 +34,17 @@ export const getArticle = async () => {
         "Could not connect to the server, please check your internet connection"
       );
     }
+    Alert.alert("Press reload to refresh the screen");
     reject(error.response.data);
   }
 };
 
-// export const deleteArticle = async (data) => {
-//   let data = data;
-//   try {
-//     let result = axios.delete(`${BASE_URL}news/${data.id}`);
-//     let fi = await result;
-//     return data;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+export const deleteArticle = async (data) => {
+  try {
+    let result = axios.delete(`${BASE_URL}news/${data.id}`);
+    let data = await result;
+    return data.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

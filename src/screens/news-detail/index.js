@@ -37,7 +37,6 @@ const NewsDetail = ({ route, navigation }) => {
         body: body,
         author: author,
       });
-      setIsVisible(false);
       toast.show("Task finished successfully", {
         type: "success",
         placement: "top",
@@ -45,6 +44,7 @@ const NewsDetail = ({ route, navigation }) => {
         offset: 30,
         animationType: "slide-in",
       });
+      setIsVisible(false);
       setTitle("");
       setBody("");
       setAuthor("");
