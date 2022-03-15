@@ -1,7 +1,7 @@
 # News App
 
 <span>
-<img src="./docs/assets/preview.mp4" alt="preview"  width="270" />
+<img src="./docs/assets/preview.gif" alt="preview"  width="270" />
 </span>
 
 <hr />
@@ -15,10 +15,10 @@ $ cd rn-news
 $ yarn install
 ```
 
-### Run on Android
+### Run Development Server
 
 ```
-$ yarn run android
+$ yarn start
 ```
 
 ## A brief description of the project
