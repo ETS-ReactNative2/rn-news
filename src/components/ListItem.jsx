@@ -13,7 +13,6 @@ import Swipeable from "react-native-gesture-handler/Swipeable";
 import { color } from "../config/theme";
 
 function ListItem({ title, subTitle, image, onPress, renderRightAction }) {
-  console.log(title, subTitle);
   return (
     <Swipeable renderRightActions={renderRightAction}>
       <TouchableHighlight underlayColor={color.underlayColor}>

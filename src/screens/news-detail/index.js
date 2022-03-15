@@ -120,7 +120,10 @@ const NewsDetail = ({ route, navigation }) => {
           <View style={{ flexDirection: "row" }}>
             <FAB
               visible={!modalVisible}
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={() => {
+                setModalType("news");
+                setModalVisible(!modalVisible);
+              }}
               placement="left"
               size="small"
               icon={{ name: "edit", color: "white" }}

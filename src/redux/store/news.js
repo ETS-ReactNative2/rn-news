@@ -90,7 +90,6 @@ const model = {
       await dispatch.news.editNews(news);
     },
     async delete(data) {
-      console.log(data);
       const news = await deleteArticle(data);
       dispatch.news.deleteNews(news);
     },
