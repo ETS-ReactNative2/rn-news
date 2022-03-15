@@ -107,6 +107,7 @@ const NewsDetail = ({ route, navigation }) => {
       setCommentBody("");
       setCommentAuthor("");
       setIsVisible(false);
+      setModalVisible(false);
     } else {
       Alert.alert("Please enter valid data");
     }
