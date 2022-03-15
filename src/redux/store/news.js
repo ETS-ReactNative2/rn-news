@@ -1,4 +1,9 @@
-import { deleteArticle, getArticle } from "../../utils/lib/news";
+import {
+  deleteArticle,
+  getArticle,
+  updateArticle,
+  createComment,
+} from "../../utils/lib/news";
 
 const model = {
   state: [],

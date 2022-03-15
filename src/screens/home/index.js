@@ -134,7 +134,6 @@ export default NewsList;
 const styles = StyleSheet.create({
   button: {
     margin: 10,
-    // flex: 1,
   },
   buttonContainer: {
     flexDirection: "column",

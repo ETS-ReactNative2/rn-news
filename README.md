@@ -29,6 +29,8 @@ $ yarn start
 
 > Perform CRUD actions on news and comments
 
+> Create Image carousel for news item
+
 ## Folder Structure
 
 ```

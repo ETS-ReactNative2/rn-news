@@ -41,7 +41,7 @@ const NewsDetail = ({ route, navigation }) => {
         type: "success",
         placement: "top",
         duration: 4000,
-        offset: 30,
+        offset: 50,
         animationType: "slide-in",
       });
       setIsVisible(false);
@@ -77,6 +77,13 @@ const NewsDetail = ({ route, navigation }) => {
 
   const onDeleteComment = (comment) => {
     dispatch.deleteComment({ ...comment });
+    toast.show("Comment Deleted", {
+      type: "success",
+      placement: "top",
+      duration: 4000,
+      offset: 40,
+      animationType: "slide-in",
+    });
   };
 
   const onEdit = (type, commentId) => {
@@ -106,7 +113,7 @@ const NewsDetail = ({ route, navigation }) => {
   };
 
   return (
-    <Screen>
+    <View>
       <ScrollView style={styles.scrollView}>
         <SingleNews item={filteredNews}>
           <View style={{ flexDirection: "row" }}>
@@ -198,7 +205,7 @@ const NewsDetail = ({ route, navigation }) => {
           />
         </Card>
       </ScrollView>
-    </Screen>
+    </View>
   );
 };
 
