@@ -37,7 +37,7 @@ const NewsDetail = ({ route, navigation }) => {
         body: body,
         author: author,
       });
-      toast.show("Task finished successfully", {
+      toast.show("Edit finished successfully", {
         type: "success",
         placement: "top",
         duration: 4000,
