@@ -113,7 +113,7 @@ const NewsDetail = ({ route, navigation }) => {
   };
 
   return (
-    <View>
+    <Screen>
       <ScrollView style={styles.scrollView}>
         <SingleNews item={filteredNews}>
           <View style={{ flexDirection: "row" }}>
@@ -205,7 +205,7 @@ const NewsDetail = ({ route, navigation }) => {
           />
         </Card>
       </ScrollView>
-    </View>
+    </Screen>
   );
 };
 
