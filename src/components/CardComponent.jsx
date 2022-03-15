@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import styles from "../config/style";
 import { Text } from "react-native-elements";
 import { TouchableOpacity, View, Image } from "react-native";
-import { ImageComponent } from "./ImageComponent";
 import { defaultImage } from "../config/constants";
 
 const CardComponent = ({ item, navigation, id }) => {

@@ -1,9 +1,8 @@
 import { StyleSheet, FlatList } from "react-native";
-import { Button, Card, Input, FAB } from "react-native-elements";
+import { Button, Card } from "react-native-elements";
 import React from "react";
 import ListItem from "./ListItem";
 import ListItemDeleteAction from "./ListItemDeleteAction";
-import AppModal from "./AppModal";
 
 const CommentBox = ({ filteredNews, onDeleteComment, onPressEdit }) => {
   return (

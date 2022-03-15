@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { StyleSheet, Alert, View, ScrollView } from "react-native";
 import { Button, Input, Card, FAB } from "react-native-elements";
 import { useToast } from "react-native-toast-notifications";
