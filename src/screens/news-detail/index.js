@@ -106,6 +106,7 @@ const NewsDetail = ({ route, navigation }) => {
       });
       setCommentBody("");
       setCommentAuthor("");
+      setModalVisible(false);
       setIsVisible(false);
       setModalVisible(false);
     } else {
