@@ -1,7 +1,7 @@
 # News App
 
 <span>
-<img src="./docs/assets/preview.gif" alt="preview"  width="270" />
+<img src="./docs/assets/preview.mp4" alt="preview"  width="270" />
 </span>
 
 <hr />
@@ -71,10 +71,10 @@ $ yarn run android
 
 5. Optimised image rendering using `react-native-fast-image`.
 
-6. Optimised image rendering using `react-native-size-matters`.
+6. Optimised Application ui scaling using `react-native-size-matters`.
 
-7. Optimised image rendering using `react-native-fast-image`.
+7. Implemented image carousel with `react-native-snap carousel`.
 
 8. Used `redux-rematch` for managing global state.
 
-9. Used `circleci` for continuous integration.
+9. Used `axios` for managing api calls.

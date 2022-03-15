@@ -21,7 +21,7 @@ const CardComponent = ({ item, navigation, id }) => {
         <Image
           style={[styles.img]}
           source={{
-            uri: image,
+            uri: defaultImage,
           }}
         />
         <View style={[styles.info]}>

@@ -1,13 +1,8 @@
 import React from "react";
-import {
-  Dimensions,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Dimensions, Image, StyleSheet, View } from "react-native";
 
 import { Text } from "react-native-elements";
+import { defaultImage } from "../config/constants";
 import { color, fontSize } from "../config/theme";
 
 const windowWidth = Dimensions.get("window").width;
@@ -16,10 +11,18 @@ const windowHeight = Dimensions.get("window").height;
 const SingleNews = ({ item, children }) => {
   return (
     <View style={styles.container}>
-      <Image
-        source={{ uri: item?.images[0].uri }}
-        style={{ height: "30%", resizeMode: "cover", width: windowWidth }}
-      />
+      {item.images ? (
+        <Image
+          source={{ uri: item.images[0].uri }}
+          style={{ height: "30%", resizeMode: "cover", width: windowWidth }}
+        />
+      ) : (
+        <Image
+          source={{ uri: defaultImage }}
+          style={{ height: "30%", resizeMode: "cover", width: windowWidth }}
+        />
+      )}
+
       <View
         style={{
           ...styles.description,
