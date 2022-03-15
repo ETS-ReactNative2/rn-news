@@ -45,6 +45,7 @@ const NewsDetail = ({ route, navigation }) => {
         animationType: "slide-in",
       });
       setIsVisible(false);
+      setModalVisible(false);
       setTitle("");
       setBody("");
       setAuthor("");
