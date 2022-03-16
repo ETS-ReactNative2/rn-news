@@ -49,7 +49,7 @@ $ yarn start
         |-- news-detail/
     |-- utils/
         |-- lib/
-        |-- news-detail/
+        |-- index.js
     |-- App.js
 ```
 
